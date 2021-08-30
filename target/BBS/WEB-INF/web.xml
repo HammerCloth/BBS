@@ -1,7 +1,40 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
+    <!--  配置spring-->
+    <!--  整个项目的全局变量，相当于设定一个固定的值-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <!--这个监听器实现了ServletContextListener接口，其作用是启动web容器时，自动装配ApplicationContext
+        的配置信息-->
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--  配置Spring MVC-->
+
+    <!--  配置dispatcher，前置控制器，用于拦截匹配的请求，将请求根据相应的规则分发到目标Controller处理-->
+    <servlet>
+        <servlet-name>spring-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--    配置SpringMvc需要加载的配置文件-->
+        <init-param>
+<!--          整个项目的局部变量，容器启动的时候就会加载配置文件-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>spring-dispatcher</servlet-name>
+        <!--    默认匹配所有请求-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
 </web-app>
