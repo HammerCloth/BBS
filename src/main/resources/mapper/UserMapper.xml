@@ -4,12 +4,12 @@
 <mapper namespace="com.syx.dao.UserDAO">
 
     <sql id="userField">
-        a.id as "id",
+        a.username as "id",
         a.name as "name",
         a.password as "password"
     </sql>
 
-    <select id="findAll" resultType="com.syx.model.User">
-        select <include refid="userField"></include> from test as a
-    </select>
+    <insert id="addUser" parameterType="com.syx.model.User">
+        INSERT INTO user(username,password,sex,email) VALUE (#{username},#{password},#{sex},#{email})
+    </insert>
 </mapper>

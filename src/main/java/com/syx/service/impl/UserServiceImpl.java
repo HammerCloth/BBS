@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDAO userDAO;
     @Override
-    public List<User> findAll() {
-        return userDAO.findAll();
+    public int addUser(User user) {
+        return userDAO.addUser(user);
     }
 }

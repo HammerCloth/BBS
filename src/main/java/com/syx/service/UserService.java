@@ -10,5 +10,6 @@ import java.util.List;
  * @version:v1.0
  */
 public interface UserService {
-    List<User> findAll();
+
+    int addUser(User user);
 }
